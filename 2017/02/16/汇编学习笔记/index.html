@@ -116,7 +116,13 @@
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwgy1fcshnh2zpzj30vu0pon2f.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNbRwgy1fcshoiy7pbj30tu0l07af.jpg">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNbRwgy1fcshwxeb4jj30vc092abw.jpg">
-<meta property="og:updated_time" content="2017-02-17T08:43:59.000Z">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNbRwgy1fctme2350mj30uw080wfx.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNbRwly1fcvqn83pr3j312i0g8wh0.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNbRwly1fcvqqf48kaj315q0le4as.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwly1fcvrrda93tj31220ju0xq.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNbRwly1fcvrs7bynij312e0l678m.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwly1fcvrv3a9qvj30tq0ha0vb.jpg">
+<meta property="og:updated_time" content="2017-02-19T06:42:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编语言学习笔记（一）">
 <meta name="twitter:description" content="基础知识汇编语言的组成汇编语言由3类指令组成：
@@ -450,6 +456,101 @@
 </li>
 </ul>
 <p><img src="https://ww4.sinaimg.cn/large/006tNbRwgy1fcshwxeb4jj30vc092abw.jpg" alt=""></p>
+<ul>
+<li><p>16位结构的CPU含义如下：</p>
+<blockquote>
+<ul>
+<li>运算器一次最多可处理16位的数据；</li>
+<li>寄存器的最大宽度为16位；</li>
+<li>寄存器和运算器之间的通路为16位</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><code>地址加法器</code>如何得到物理地址的：</p>
+<blockquote>
+<p><strong>物理地址 = (CS)段地址X16 + (IP)偏移地址</strong></p>
+</blockquote>
+</li>
+<li><p>修改CS、IP的指令</p>
+</li>
+</ul>
+<pre><code>&gt; `jmp` 段地址: 偏移地址 =&gt; 用指令中给出的段地址修改`CS`，偏移地址修改`IP`；
+
+&gt; 例如, `jmp` 2AE3:3，执行以后：`CS`=2AE3H， `IP` = 0003H
+
+&gt; `jmp` 某一合法寄存器 =&gt; 用寄存器的值修改`IP`
+
+&gt; 例如, ax = 1000H, `jmp` ax执行以后, `Ip` = 1000H
+</code></pre><ul>
+<li><code>DS寄存器</code> 通常存放要访问数据的段地址.</li>
+</ul>
+<h2 id="栈机制"><a href="#栈机制" class="headerlink" title="栈机制"></a>栈机制</h2><ul>
+<li><code>SS</code> 栈段地址寄存器</li>
+<li><p><code>SP</code> 栈偏移地址寄存器</p>
+</li>
+<li><p><strong>任意时刻, <code>SS:SP</code>指向栈顶元素。</strong></p>
+</li>
+</ul>
+<h2 id="伪指令"><a href="#伪指令" class="headerlink" title="伪指令"></a>伪指令</h2><ul>
+<li><p><code>segment</code>和<code>ends</code>是一对成对使用的伪指令，功能是定一个段,使用格式:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">段名 segment </div><div class="line">	.</div><div class="line">	.</div><div class="line">段名 ends</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><code>end</code>是一个汇编程序的结束标志，编译器在编译汇编程序时，如果碰到伪指令<code>end</code>，就结束对源程序的编译。</p>
+</li>
+<li><p><code>assume</code> 在程序的开头， 用<code>assume cs:codemsg</code>将用作代码段的段<code>codemsg</code>和CPU中的段寄存器cs联系起来了。</p>
+</li>
+<li><p>在程序的末尾使用一下两条指令，可以实现程序的返回。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mov ax, 4c00H</div><div class="line">int 21H</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tNbRwgy1fctme2350mj30uw080wfx.jpg" alt=""></p>
+<h2 id="BX-指令"><a href="#BX-指令" class="headerlink" title="[BX]指令"></a>[BX]指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mov ax, [bx]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>功能：bx中存放的数据作为一个偏移地址EA，段地址SA默认在ds中，将SA:EA处的数据送入ax中。即：(ax) = ((ds)*16 + (bx))。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mov [bx], ax</div></pre></td></tr></table></figure>
+<blockquote>
+<p>功能：bx中存放的数据作为一个偏移地址EA，段地址SA默认在ds中，将ax中数据送入内存SA:EA处。即：（(ds)*16 + (bx)）= (ax)</p>
+</blockquote>
+<h2 id="Loop指令"><a href="#Loop指令" class="headerlink" title="Loop指令"></a>Loop指令</h2><p><code>Loop</code> 指令的格式是：loop标号，CPU执行loop指令时，要进行两步操作：</p>
+<ol>
+<li><code>(cx) = (cx)-1</code></li>
+<li>判断cx中值是否为0，不为零，则转至标号处执行程序，如果为零，则向下执行。</li>
+</ol>
+<h2 id="操作符offset"><a href="#操作符offset" class="headerlink" title="操作符offset"></a>操作符offset</h2><p>操作符offset在汇编语言中是由编译器处理的符号，它的功能是取得标号的偏移地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">assume cs:codmsg</div><div class="line">codemsg segment</div><div class="line">	start: move ax, offset start; 相当于mov ax, 0</div><div class="line">		s: move ax, offset s; 相当于mov ax，3</div><div class="line">codemsg ends</div><div class="line"></div><div class="line">end start</div></pre></td></tr></table></figure>
+<p>在上面的程序中，offset取得了标号start和s的偏移地址0和3，所以指令：<code>mov ax, offset start</code>相当于指令<code>mov ax, 0</code>, 因为start是代码中的标号，它所标记的指令是代码中的第一条指令，偏移地址为0；</p>
+<p><code>mov ax, offset s</code>相当于指令<code>mov ax, 3</code>, 因为s是代码中的标号，它所标记的指令是代码中的第一条指令，偏移地址为3；</p>
+<h2 id="jmp指令"><a href="#jmp指令" class="headerlink" title="jmp指令"></a>jmp指令</h2><p>jmp为无条件转移指令，可以修改IP也可以同时修改CS和IP；jmp指令要给出两种信息：</p>
+<ol>
+<li>转移的目的地址，即CS（段地址寄存器）</li>
+<li>转移的距离（段间转移，段内近转移，段内短转移）</li>
+</ol>
+<h3 id="依据位移进行转移的jmp指令"><a href="#依据位移进行转移的jmp指令" class="headerlink" title="依据位移进行转移的jmp指令"></a>依据位移进行转移的jmp指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jmp short 标号(转移到标号处执行)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这种格式的jmp指令实现的是段内短转移，它对IP的修改范围是-128~127，也就是说，它向前转移时，最多可越过128个字节，向后转移时，最多可越过127个字节。jmp指令中的short符号说明指令是进行短转移，jmp指令中的标号是代码段中的标号，指明了指令要转移的目的地，转移指令执行结束以后，CS:IP应该指向标号处的指令。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">assume 	cs:codemsg</div><div class="line">codemsg 	segment</div><div class="line">	start 	mov ax, 0</div><div class="line">	   		jmp short s</div><div class="line">	   		add ax, 1</div><div class="line">	   	s: inc ax</div><div class="line">codemsg ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p>上面的程序执行后，ax的值为1，因为执行了jmp short s后，越过了add ax，1，IP执行了标号s处的inc ax，也就是说，ax只执行了一次+1操作。</p>
+<h5 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h5><p><strong>CPU在执行jmp指令时，并不需要知道要转移的目的地址。</strong></p>
+<p>什么意思呢？</p>
+<p>原来，在<code>jmp short 标号</code>指令所对应的机器码中，并不包含转移的目的地址，而是包含了转移的位移，这个位移是编译器根据汇编指令中的“标号”计算出来的，具体如下图：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNbRwly1fcvqn83pr3j312i0g8wh0.jpg" alt=""></p>
+<p><img src="https://ww3.sinaimg.cn/large/006tNbRwly1fcvqqf48kaj315q0le4as.jpg" alt=""></p>
+<p>###转移的目的地址在指令中的jmp指令</p>
+<p><code>jmp far ptr 标号</code>实现的是段间转移，又称远转移，功能如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">(CS)=标号所在段的段地址，(IP)=标号在段中的偏移地址</div><div class="line">``` </div><div class="line"></div><div class="line">`far ptr`指明了指令用段的段地址和偏移地址修改CS和IP。</div><div class="line"></div><div class="line">###转移地址在寄存器中的jmp指令</div><div class="line"></div><div class="line">指令格式： `jmp 16位 reg`</div><div class="line"></div><div class="line">功能：(IP) = (16位reg)</div><div class="line"></div><div class="line">###转移地址在内存中的jmp指令</div><div class="line"></div><div class="line">转移地址在内存中的jmp指令有两种格式：</div><div class="line"></div><div class="line">#### 一、段内转移</div><div class="line"></div><div class="line">`jmp word ptr 内存单元地址`</div><div class="line"></div><div class="line">功能：从内存单元地址处开始存放一个字，是转移的目的偏移地址。</div><div class="line"></div><div class="line">内存单元可以用寻址方式的任意一种给出。</div><div class="line">例如：</div></pre></td></tr></table></figure>
+<p>mov ax 0123H<br>mov ds:[0], ax<br>jmp word ptr ds:[0]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 段间转移</div><div class="line"></div><div class="line">`jmp dword ptr 内存单元地址`</div><div class="line"></div><div class="line">功能：从内存单元地址处开始存放两个字，高地址处的字是转移的目的的段地址，低地址处是转移的目的的偏移地址。</div><div class="line"></div><div class="line">&gt; (CS)=(内存地址单元+2)</div><div class="line">&gt; </div><div class="line">&gt; (IP)=（内存地址单元）</div></pre></td></tr></table></figure></p>
+<p>mov ax, 0123H<br>mov ds:[0], ax<br>mov word ptr ds:[2], 0<br>jmp dword ptr ds:[0]</p>
+<p>```</p>
+<h3 id="jcxz指令"><a href="#jcxz指令" class="headerlink" title="jcxz指令"></a>jcxz指令</h3><p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fcvrrda93tj31220ju0xq.jpg" alt=""></p>
+<p>###loop指令</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tNbRwly1fcvrs7bynij312e0l678m.jpg" alt=""></p>
+<h2 id="ret和retf指令"><a href="#ret和retf指令" class="headerlink" title="ret和retf指令"></a>ret和retf指令</h2><p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fcvrv3a9qvj30tq0ha0vb.jpg" alt=""></p>
 
       
     </div>
@@ -601,7 +702,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编语言的组成"><span class="nav-number">1.1.</span> <span class="nav-text">汇编语言的组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储单元"><span class="nav-number">1.2.</span> <span class="nav-text">存储单元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器芯片"><span class="nav-number">1.2.1.</span> <span class="nav-text">存储器芯片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存地址空间"><span class="nav-number">1.2.2.</span> <span class="nav-text">内存地址空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器"><span class="nav-number">1.3.</span> <span class="nav-text">寄存器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编语言的组成"><span class="nav-number">1.1.</span> <span class="nav-text">汇编语言的组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储单元"><span class="nav-number">1.2.</span> <span class="nav-text">存储单元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器芯片"><span class="nav-number">1.2.1.</span> <span class="nav-text">存储器芯片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存地址空间"><span class="nav-number">1.2.2.</span> <span class="nav-text">内存地址空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器"><span class="nav-number">1.3.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈机制"><span class="nav-number">1.4.</span> <span class="nav-text">栈机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪指令"><span class="nav-number">1.5.</span> <span class="nav-text">伪指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BX-指令"><span class="nav-number">1.6.</span> <span class="nav-text">[BX]指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loop指令"><span class="nav-number">1.7.</span> <span class="nav-text">Loop指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作符offset"><span class="nav-number">1.8.</span> <span class="nav-text">操作符offset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jmp指令"><span class="nav-number">1.9.</span> <span class="nav-text">jmp指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依据位移进行转移的jmp指令"><span class="nav-number">1.9.1.</span> <span class="nav-text">依据位移进行转移的jmp指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#要点"><span class="nav-number">1.9.1.0.1.</span> <span class="nav-text">要点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jcxz指令"><span class="nav-number">1.9.2.</span> <span class="nav-text">jcxz指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret和retf指令"><span class="nav-number">1.10.</span> <span class="nav-text">ret和retf指令</span></a></li></ol></li></ol></div>
             
 
           </div>
