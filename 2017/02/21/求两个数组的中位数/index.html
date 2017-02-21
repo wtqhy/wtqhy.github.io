@@ -1,0 +1,797 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="题目分析
+There are two sorted arrays nums1 and nums2 of size m and n respectively.
+Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+
+Example 1:
+1234nums1 =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-1 求两个已排序数组的中位数">
+<meta property="og:url" content="http://yoursite.com/2017/02/21/求两个数组的中位数/index.html">
+<meta property="og:site_name" content="wtqhy的小站">
+<meta property="og:description" content="题目分析
+There are two sorted arrays nums1 and nums2 of size m and n respectively.
+Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+
+Example 1:
+1234nums1 =">
+<meta property="og:updated_time" content="2017-02-21T16:57:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode-1 求两个已排序数组的中位数">
+<meta name="twitter:description" content="题目分析
+There are two sorted arrays nums1 and nums2 of size m and n respectively.
+Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+
+Example 1:
+1234nums1 =">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/21/求两个数组的中位数/"/>
+
+
+
+
+
+  <title> LeetCode-1 求两个已排序数组的中位数 | wtqhy的小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">wtqhy的小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Show me your code</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/21/求两个数组的中位数/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="wtqhy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="wtqhy的小站">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="wtqhy的小站" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode-1 求两个已排序数组的中位数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-21T17:53:01+08:00">
+                2017-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/21/求两个数组的中位数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/21/求两个数组的中位数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><blockquote>
+<p>There are two sorted arrays nums1 and nums2 of size m and n respectively.</p>
+<p>Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+</blockquote>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">nums1 = [1, 3]</div><div class="line">nums2 = [2]</div><div class="line"></div><div class="line">The median is 2.0</div></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">nums1 = [1, 2]</div><div class="line">nums2 = [3, 4]</div><div class="line"></div><div class="line">The median is (2 + 3)/2 = 2.5</div></pre></td></tr></table></figure>
+<p>题目的意思是，有两个已经排好序的数组<code>nums1</code>和<code>nums2</code>，其中<code>nums1</code>的长度为<code>m</code>, <code>nums2</code>的长度为<code>n</code>。让我们实现一个方法找出这两个数组的中位数，并且时间复杂度为<code>O(log(m+n))</code>。</p>
+<p>看到这里，你心中有解决方案了吗？</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>当我看完题目的第一反应就是：先将两个数组合并成一个数组，然后找出中位数。然后就有了以下方案：</p>
+<h2 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h2><p>先合并成一个数组，然后求中位数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">func findMedianSortedArrays(_ nums1: [Int], _ nums2: [Int]) -&gt; Double &#123;</div><div class="line">    </div><div class="line">    let nums = [nums1, nums2]</div><div class="line">    let res = nums.flatMap &#123; return $0 &#125;.sorted()</div><div class="line">    let remainder = res.count % 2</div><div class="line">    if remainder == 0 &#123;</div><div class="line">        let index = res.count / 2</div><div class="line">        return Double(res[index] + res[index-1]) / 2.0</div><div class="line">    &#125; else &#123;</div><div class="line">        let index = res.count / 2</div><div class="line">        return Double(res[index])</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>哈哈，swift还是挺强大的，简单几行就搞定了，然后我们再看看这个方法的时间复杂度是多少，首先我们用到了两个方法<code>flatMap</code>和<code>sorted</code>，那么这两个方法的复杂度是多少呢</p>
+<ol>
+<li><p><code>faltMap</code>的时间复杂度</p>
+<p> 我们在api文档中发现了这么一段话</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/// - Complexity: O(*m* + *n*), where *m* is the length of this 	sequence</div><div class="line">   ///   and *n* is the length of the result.</div><div class="line">   /// - SeeAlso: `joined()`, `map(_:)`</div><div class="line">   public func flatMap&lt;SegmentOfResult : Sequence&gt;(_ transform: (Element) throws -&gt; SegmentOfResult) rethrows -&gt; [SegmentOfResult.Iterator.Element]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>也就是说`flatMap`的时间复杂度为`O(m+n)`
+</code></pre><ol>
+<li><p><code>sorted</code>的时间复杂度</p>
+<p> 我们再去查api文档，what？居然没有说明。既然文档不说明，那我们只能把<code>sorted</code>方法的内部实现想象成大部分标准库采用的快排了，那么它的时间复杂度应该为<code>O(nlogn)</code>。</p>
+</li>
+</ol>
+<p>综合以上两项分析，那么该方案的时间复杂度应该为<code>O(m+n) + O(nlogn)</code>，也就是<code>O(nlogn)</code>，这显然不符合题目要求。</p>
+<p> 这说明，虽然先排序后，后查找中位数的方案很容易就想得到，而且即使不适用系统api，使用简单的快速排序，也能实现，但这显然不符合题目的要求。因此，我们不能使用先排序，再查找这种方法了。</p>
+<h2 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h2><p>那么让我们再捋一下该题的思路，要解决这个问题，我们首先要明白<code>median</code>（中位数）有什么用处，在统计数学中，中位数通常用来将一个集合<code>set</code>分割成两个长度相等的子集合<code>subSet</code>,并且其中一个子集合中的元素总是比另一的子集合的元素大。如果我们搞清楚了中位数的用途，那我们离答案就很近了。</p>
+<p>首先，我们将<code>nums1</code>随机分成两部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">      left_nums1             			|        right_nums1</div><div class="line">nums1[0], nums1[1], ..., nums1[i-1]  	|  nums1[i], nums1[i+1], ..., nums1[m-1]</div></pre></td></tr></table></figure>
+<p>因为<code>nums1</code>有m个元素，所以我们有<code>m+1</code>种分割方法，也就是<code>i=0~m</code>,并且我们知道，<code>Len(left_nums1) = i, Len(right_nums1) = m - i</code>。</p>
+<p>注意： 当<code>i=0</code>时，<code>left_nums1</code>为空，当<code>i=m</code>，<code>right_nums1</code>为空。</p>
+<p>同样的，我们也将<code>nums2</code>随机分成两部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">      left_nums2             			|        right_nums2</div><div class="line">nums2[0], nums2[1], ..., nums2[j-1]  	|  nums2[j], nums2[j+1], ..., nums2[n-1]</div></pre></td></tr></table></figure>
+<p>然后，将<code>left_nums1</code>和<code>left_nums2</code>放入同一个集合，将<code>right_sums1</code>和<code>right_sums2</code>放入另外一个集合。如下图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">      left_part         				|        right_part</div><div class="line">nums1[0], nums1[1], ..., nums1[i-1]  	|  nums1[i], nums1[i+1], ..., nums1[m-1]</div><div class="line">nums2[0], nums2[1], ..., nums2[j-1]  	|  nums2[j], nums2[j+1], ..., nums2[n-1]</div></pre></td></tr></table></figure>
+<p>假如我们可以确保一下两个条件成立：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1) len(left_part) == len(right_part)</div><div class="line">2) max(left_part) &lt;= min(right_part)</div></pre></td></tr></table></figure>
+<p>然后我们将<code>sums1</code>和<code>sums2</code>中元素分别放到<code>left</code>和<code>right</code>两部分中，并且使左右两个集合的长度相等，且右边集合的元素总是比左边集合的元素大，那么<code>median = (max(left_part) + min(right_part))/2</code>成立。</p>
+<p> <strong>进一步分析</strong></p>
+<p> 为了确保上面的两个条件成立，我们需要保证以下条件成立：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(1) i + j == m - i + n - j (or: m - i + n - j + 1)</div><div class="line">(2) B[j-1] &lt;= A[i] and A[i-1] &lt;= B[j]</div></pre></td></tr></table></figure>
+<p> 由上述条件一可知，因为<code>i=0~m</code>, 所以<code>j=(m+n)/2-i</code>或者<code>j=(m+n+1)/2-i</code></p>
+<ol>
+<li><p>简单起见，我们假设<code>sums1[i-1]</code>,<code>sums2[j-1]</code>, <code>sums1[i]</code>,<code>sums2[j]</code>总是有效的数字，<code>i=0</code>,<code>j=0</code>,<code>i=m</code>,<code>j=n</code>这几种情形我们放在最后讨论。</p>
+</li>
+<li><p><strong>n必须大于等于m</strong>, 为什么呢？因为我们要确保j是非负数，而由条件<code>0 &lt;= i &lt;= m</code>和条件<code>j = (m + n + 1)/2 - i</code>可知，如果<code>n&lt;m</code>，那么j就有可能为负数，所以需要<code>n&gt;=m</code>。</p>
+</li>
+</ol>
+<p><strong>Tips</strong></p>
+<p><code>n &gt;= m</code>的推导过程，我们假设i为最大，也即<code>i = m</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">j &gt;= 0 </div><div class="line">=&gt; (m + n + 1)/2 - i &gt;= 0 </div><div class="line">=&gt; m + n + 1 - 2m &gt;= 0</div><div class="line">=&gt; n &gt;= m + 1 </div><div class="line">=&gt; n &gt;= m</div></pre></td></tr></table></figure>
+<p><strong>所以最终方案为：</strong></p>
+<p>我们要在<code>[0, m]</code>区间内找到一个<code>i</code>，满足以下条件：</p>
+<blockquote>
+<p>当<code>j = (m + n + 1)/2 - i</code>时，<code>nums2[j-1] &lt;=nums1[i]</code>，<code>nums1[i-1] &lt;=nums2[j]</code>成立。</p>
+</blockquote>
+<p>我们可以按照以下步骤写一个二分查找的方法：</p>
+<blockquote>
+<ol>
+<li>使imin = 0，imax = m，然后在区间[imin, imax]内搜索；</li>
+<li>使i = (imin + imax) / 2，j=(m + n + 1) / 2 - i;</li>
+<li><p>此时<code>len(left_part)==len(right_part)</code>成立，并且我们可能会遇到三种情形：</p>
+<p> a. 找到了<code>i</code>，使<code>nums1[i-1] &lt;= nums2[j]</code>,并且<code>nums2[j-1] &lt;= nums1[i]</code>  成立，此时应该停止查找；</p>
+<p> b. 如果<code>nums2[j-1] &gt; nums1[i]</code>，说明nums1[i]太小，我们应该增加i，以达到<code>nums2[j-1] &lt;= nums1[i]</code>的状态。相应的，我们还要调整搜索区间，即<code>imin = i + 1</code>,然后跳转到第2步继续执行。</p>
+<pre><code>讨论：
+
+我们应该增加i，还是减小i，假设i增加, 那么相对的j会减小，那么nums1[i]就变大，nums2[j-1]就会变小，这样的话，就有机会达到`nums2[j-1] &lt;= nums1[i]`的状态。
+</code></pre><p> c. 如果<code>nums1[i-1] &gt; nums2[j]</code>，说明i过大，我们应该减小i，以达到<code>nums1[i-1] &lt;= nums2[j]</code>的状态。相应的，我们还要调整搜索区间，即<code>imax = i - 1</code>,然后跳转到第2步继续执行。</p>
+</li>
+</ol>
+</blockquote>
+<p>当我们找到这样的<code>i</code>存在时，自然而然中位数也就很容易计算了：</p>
+<ol>
+<li>如果<code>m+n</code>为奇数，那么<code>median = max(nums1[i-1], nums2[j-1])</code>;</li>
+<li>如果<code>m+n</code>为偶数，那么<code>median = (max(nums1[i-1], nums2[j-1]) + max(nums1[i], nums2[j]))/2</code>;</li>
+</ol>
+<p>现在我们需要考虑以下4种情形:</p>
+<ol>
+<li>当<code>i = 0</code>时，<code>nums1[i-1]</code>不存在，也就是说nums1在left_part没有元素存在；</li>
+<li>当<code>i = m</code>时， <code>nums1[i]</code>不存在，也就是说nums1在right_part没有元素存在；</li>
+<li>当<code>j = 0</code>时，<code>nums2[j-1]</code>不存在，也就是说nums2在left_part没有元素存在；</li>
+<li>当<code>j = n</code>时，<code>nums2[j]</code>不存在，也就是说nums2在right_part没有元素存在；</li>
+</ol>
+<p>事实上这种4种情形是非常容易处理的。</p>
+<p>我们所要做的是使<code>max(left_part) &lt;= min(right_part)</code>成立，因此，如果i不等于0也不等于m，j不等于0也不等于n的话，那么nums1[i-1], nums2[j-1], nums1[i], nums2[j]都存在，这种情形下，我们必须检查<code>nums2[j-1] &lt;= nums1[i]</code>和<code>nums1[i-1] &lt;= nums2[j]</code>是否成立。</p>
+<p>假如nums1[i-1], nums2[j-1], nums1[i], nums2[j]中的某个不存在的话，那么我们就不用检查<code>nums2[j-1] &lt;= nums1[i]</code>或<code>nums1[i-1] &lt;= nums2[j]</code>是否成立了。</p>
+<p><strong>举例</strong></p>
+<p>例1. 如果<code>i = 0</code>，那么<code>nums1[i - 1]</code>肯定不存在，此时<code>nums1[i-1] &lt;= nums2[j]</code>一定成立，此时<code>maxLeft = nums2[j-1]</code>;</p>
+<p>例2. 如果<code>i = m</code>，那么<code>nums1[i]</code>肯定不存在，<code>nums1[i-1] &lt;= nums2[j]</code>一定成立,此时<code>minRight = nums2[j]</code>。</p>
+<p>以此类推即可得到所有的边界情况。</p>
+<p>因此，我们需要考虑的是如何在[0, m]的区间内，当<code>j = (m + n + 1)/2 - i</code>时，需找到i，并做处理：</p>
+<blockquote>
+<ol>
+<li><p>考虑<code>i &gt; 0 &amp;&amp; nums1[i - 1] &gt; nums2[j]</code>，此时我们应该减小i;</p>
+</li>
+<li><p>考虑<code>i &lt; m &amp;&amp; nums1[i] &lt; nums2[j - 1]</code>,此时我们应该增加i;</p>
+</li>
+<li><p>找到i以后进行处理:</p>
+<ul>
+<li><p>leftMax的取值情况:</p>
+<p>  a. <code>i = 0</code>时, leftMax = nums2[j - 1];</p>
+<p>   b. <code>j = 0</code>时, leftMax = nums1[i - 1];</p>
+<p>   c. <code>i处于(0, m)的开区间</code>时，leftMax = max(nums1[i - 1], nums2[j - 1]);</p>
+</li>
+<li><p>rightMin的取值情况:</p>
+<p>  a. <code>i = m</code>时, rightMin = nums2[j];</p>
+<p>   b. <code>j = n</code>时, rightMin = nums1[i];</p>
+<p>   c. <code>i处于(0, m)的开区间</code>时，rightMin = min(nums1[i], nums2[j]);</p>
+</li>
+</ul>
+</li>
+<li><p>求median(中位数):</p>
+<ul>
+<li>如果<code>m + n</code>为奇数，<code>median = leftMax</code></li>
+<li>如果<code>m + n</code>为偶数，<code>median  = (leftMax + rightMin) / 2</code></li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p>附上swift版本的源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">func findMedianSortedArrays(_ nums1: [Int], _ nums2: [Int]) -&gt; Double &#123;</div><div class="line">    </div><div class="line">    let m = nums1.count</div><div class="line">    let n = nums2.count</div><div class="line">    if m &gt; n &#123;</div><div class="line">        return findMedianSortedArrays(nums2, nums1)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    if n == 0 &#123;</div><div class="line">        return -1</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    var minI = 0</div><div class="line">    var maxI = m</div><div class="line">    let halfLen = (m + n + 1) / 2</div><div class="line">    while minI &lt;= maxI &#123;</div><div class="line">        let i = (minI + maxI) / 2</div><div class="line">        let j = halfLen - i</div><div class="line">        if i &lt; m &amp;&amp; nums1[i] &lt; nums2[j - 1] &#123;</div><div class="line">            minI = i + 1</div><div class="line">        &#125; else if i &gt; 0 &amp;&amp; nums1[i - 1] &gt; nums2[j] &#123;</div><div class="line">            maxI = i - 1</div><div class="line">        &#125; else &#123;</div><div class="line">            var leftMax = 0</div><div class="line">            if i == 0 &#123;</div><div class="line">                leftMax = nums2[j - 1]</div><div class="line">            &#125; else if j == 0 &#123;</div><div class="line">                leftMax = nums1[i - 1]</div><div class="line">            &#125; else &#123;</div><div class="line">                leftMax = max(nums1[i - 1], nums2[j - 1])</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            if (m + n) % 2 == 1 &#123;</div><div class="line">                return Double(leftMax)</div><div class="line">            &#125;</div><div class="line">            var rightMin = 0</div><div class="line">            if i == m &#123;</div><div class="line">                rightMin = nums2[j]</div><div class="line">            &#125; else if j == n &#123;</div><div class="line">                rightMin = nums1[i]</div><div class="line">            &#125; else &#123;</div><div class="line">                rightMin = min(nums1[i], nums2[j])</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            return Double(leftMax + rightMin) / 2</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    return -1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该方案的时间复杂度为多少呢？O(min(m, n))，有兴趣的自行论证。</p>
+<h2 id="收尾"><a href="#收尾" class="headerlink" title="收尾"></a>收尾</h2><p>为什么是<code>j = (m + n + 1) / 2 - i</code>，而不是<code>j = (m + n) / 2</code>呢？</p>
+<blockquote>
+<p>答：其实无所谓<code>j = (m + n + 1) / 2 - i</code>,还是<code>j = (m + n) / 2</code>，这完全是个人习惯问题，当m + n为奇数时，如果<code>j = (m + n + 1) / 2 - i</code>，halfLeft会比halfRight多一个元素，此时，中位数 = leftMax；如果<code>j = (m + n) / 2 - i</code>，halfLeft会比halfRight多一个元素，此时，中位数 = rightMin。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/16/汇编学习笔记/" rel="next" title="汇编语言学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> 汇编语言学习笔记（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/21/求两个数组的中位数/"
+           data-title="LeetCode-1 求两个已排序数组的中位数" data-url="http://yoursite.com/2017/02/21/求两个数组的中位数/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="wtqhy" />
+          <p class="site-author-name" itemprop="name">wtqhy</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目分析"><span class="nav-number">1.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方案一"><span class="nav-number">2.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案二"><span class="nav-number">2.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#收尾"><span class="nav-number">2.3.</span> <span class="nav-text">收尾</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wtqhy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wtqhy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
